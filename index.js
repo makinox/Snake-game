@@ -15,6 +15,11 @@ let ax = 15,
 let xv = 0,
   yv = 0;
 
+// Initializing events
+const resultDisplay = document.querySelector('#result');
+const resetButton = document.getElementById('reset');
+const modal = document.getElementById('modal');
+
 // Initializing snake values
 let trail = [];
 let tail = 5;
@@ -56,6 +61,14 @@ function game(canvas, context) {
       tail = 5;
     }
   }
+
+  // Start? verification
+  if (tail - 5 === 0) {
+    resetButton.style.display = 'block';
+  } else {
+    resetButton.style.display = 'none';
+  }
+
   trail.push({ x: px, y: py });
   while (trail.length > tail) {
     // Snake movement
@@ -94,8 +107,11 @@ function keyPush(evt) {
 }
 
 function HandleLoose() {
-  console.log('Perdiste');
-  alert('Perdiste');
+  // console.log('Perdiste');
+  // alert('Perdiste');
+  // showNotification('Perdiste', 9000);
+  resetButton.style.display = 'block';
+  resultDisplay.textContent = 0;
   Restart();
 }
 
@@ -112,9 +128,18 @@ function Restart() {
 
 function SumApoint() {
   tail++;
+  resultDisplay.textContent = tail - 5;
 }
 
 function RandomizeFruit() {
   ax = Math.floor(Math.random() * tc);
   ay = Math.floor(Math.random() * tc);
+}
+
+function showNotification(modalText = 'Modal content', time = 1000) {
+  modal.innerHTML = modalText;
+  modal.className = 'article-modal-span animation';
+  setTimeout(() => {
+    modal.className = 'article-modal-span';
+  }, time);
 }
