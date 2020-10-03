@@ -1,19 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
-  canvas = document.getElementById('GameCanvas');
-  ctx = canvas.getContext('2d');
+  const canvas = document.getElementById('GameCanvas');
+  const context = canvas.getContext('2d');
   document.addEventListener('keydown', keyPush);
-  setInterval(game, 2000 / 15);
+  setInterval(() => game(canvas, context), 2000 / 15);
 });
 
-window.onload = function () {};
+// Initializing position values
+let px = 10,
+  py = 10;
+let gs = 20,
+  tc = 20;
+let ax = 15,
+  ay = 15;
+let xv = 0,
+  yv = 0;
 
-px = py = 10;
-gs = tc = 20;
-ax = ay = 15;
-xv = yv = 0;
-trail = [];
-tail = 5;
-function game() {
+// Initializing snake values
+let trail = [];
+let tail = 5;
+
+function game(canvas, context) {
   px += xv;
   py += yv;
   if (px < 0) {
@@ -34,17 +40,19 @@ function game() {
   }
 
   // Fill the canvas with the color black
-  ctx.fillStyle = 'black';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = 'black';
+  context.fillRect(0, 0, canvas.width, canvas.height);
 
   // Fill the snake with the color lime
-  ctx.fillStyle = 'lime';
+  context.fillStyle = 'lime';
   for (var i = 0; i < trail.length; i++) {
     // Snake status
-    // console.log({ trail, trailLenght: trail.length });
-    ctx.fillRect(trail[i].x * gs, trail[i].y * gs, gs - 2, gs - 2);
+    context.fillRect(trail[i].x * gs, trail[i].y * gs, gs - 2, gs - 2);
     if (trail[i].x == px && trail[i].y == py) {
       // Inmovil or restart condition
+      if (trail.length > 5) {
+        HandleLoose();
+      }
       tail = 5;
     }
   }
@@ -56,13 +64,14 @@ function game() {
 
   if (ax == px && ay == py) {
     // Snake points
-    tail++;
-    ax = Math.floor(Math.random() * tc);
-    ay = Math.floor(Math.random() * tc);
+    SumApoint();
+    RandomizeFruit();
   }
-  ctx.fillStyle = 'red';
-  ctx.fillRect(ax * gs, ay * gs, gs - 2, gs - 2);
+  context.fillStyle = 'red';
+  context.fillRect(ax * gs, ay * gs, gs - 2, gs - 2);
 }
+
+// User movements
 function keyPush(evt) {
   switch (evt.keyCode) {
     case 37:
@@ -82,4 +91,30 @@ function keyPush(evt) {
       yv = 1;
       break;
   }
+}
+
+function HandleLoose() {
+  console.log('Perdiste');
+  alert('Perdiste');
+  Restart();
+}
+
+function Restart() {
+  px = 10;
+  py = 10;
+  gs = 20;
+  tc = 20;
+  ax = 15;
+  ay = 15;
+  xv = 0;
+  yv = 0;
+}
+
+function SumApoint() {
+  tail++;
+}
+
+function RandomizeFruit() {
+  ax = Math.floor(Math.random() * tc);
+  ay = Math.floor(Math.random() * tc);
 }
