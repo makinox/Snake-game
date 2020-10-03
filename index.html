@@ -4,9 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake game</title>
+    <link rel="stylesheet" href="styles.css"></link>
   </head>
   <body>
-    <canvas id="GameCanvas" width="400" height="400"></canvas>
+    <article class="article-modal">
+      <span class="article-modal-span" id="modal">Modal content</span>
+    </article>
+
+    <section class="section-header">
+      <h3>Score: <span id="result">0</span></h3>
+    </section>
+
+    <section class="section-game">
+      <div>
+        <canvas id="GameCanvas" width="400" height="400"></canvas>
+      </div>
+    </section>
+
+    <section class="article-reset">
+      <button class="article-reset-span" id="reset" onclick="start()">Restart</button>
+    </section>
   </body>
   <script src="./index.js" charset="utf-8"></script>
 </html>
