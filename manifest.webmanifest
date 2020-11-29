@@ -1,0 +1,12 @@
+{
+  "name": "Snake game",
+  "short_name": "Snake game",
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "display": "minimal-ui",
+  "icons": [
+    { "src": "images/Logo.svg", "sizes": "181x337", "type": "image/svg" },
+    { "src": "images/Logo.svg", "sizes": "any", "type": "image/svg" }
+  ]
+}
