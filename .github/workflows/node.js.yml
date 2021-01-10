@@ -1,0 +1,60 @@
+name: Snake game continuous integration
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Integration process
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v2
+
+      - name: Finding if cache exist
+        uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Create env files
+        run: echo '{"BASE_URL":"${{secrets.BASE_URL}}"}' > cypress.env.json
+
+      - name: Running install process
+        run: yarn install
+
+      - name: Running building
+        run: yarn build
+
+      - name: Running tests
+        run: yarn cy-test
+
+      - name: Saving test videos
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
+      - name: Upload integration result
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
