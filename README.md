@@ -6,4 +6,4 @@ Used:
 
 Link to [snake!](https://snake.jesusbossa.dev/)
 
-![Image of snake](./images/preview.png)
+![Image of snake](./src/images/preview.png)
