@@ -2,7 +2,7 @@
 
 export default context('Login', () => {
   it('Its login page', () => {
-    cy.visit(Cypress.env('BASE_URL'));
+    cy.visit(Cypress.env('baseUrl'));
     cy.location('pathname').should('include', '/');
   });
 

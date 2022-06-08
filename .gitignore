@@ -4,3 +4,4 @@ package-lock.json
 cypress.env.json
 yarn.lock
 dist
+cypress/videos
