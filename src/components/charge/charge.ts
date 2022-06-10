@@ -1,4 +1,5 @@
 import '../../styles/styles.css';
+import getDeviceType, {DeviceType} from '../../utils/utils';
 
 export default function Charge() {
   document.addEventListener('DOMContentLoaded', () => {
@@ -6,7 +7,7 @@ export default function Charge() {
     const context = canvas.getContext('2d') as any;
     document.addEventListener('keydown', keyPush);
     setInterval(() => game(canvas, context), 2000 / 15);
-    controls();
+    if (getDeviceType() !== DeviceType.Desktop) controls();
   });
 
   // Initializing position values
