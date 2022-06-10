@@ -8,8 +8,8 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--BackgroundPrimary);
-  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -107,7 +107,8 @@ body {
   margin-top: 20px;
 }
 
-.article-reset-span {
+.article-reset-span,
+.section-controls span {
   border: none;
   outline: none;
   display: none;
@@ -119,12 +120,26 @@ body {
   box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.1);
 }
 
-.article-reset-span:hover {
+.article-reset-span:hover,
+.section-controls span:hover {
   box-shadow: 3px 3px 13px 10px rgba(0, 0, 0, 0.1);
 }
 
-.article-reset-span:active {
+.article-reset-span:active,
+.section-controls span:active {
   background-color: var(--BackgroundThird);
+}
+
+.section-controls {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.section-controls span {
+  margin: 5px;
+  cursor: pointer;
+  display: initial;
 }
 
 .animation {

@@ -2,10 +2,11 @@ import '../../styles/styles.css';
 
 export default function Charge() {
   document.addEventListener('DOMContentLoaded', () => {
-    const canvas: HTMLElement | any = document.getElementById('GameCanvas');
+    const canvas = document.getElementById('GameCanvas') as HTMLCanvasElement;
     const context = canvas.getContext('2d') as any;
     document.addEventListener('keydown', keyPush);
     setInterval(() => game(canvas, context), 2000 / 15);
+    controls();
   });
 
   // Initializing position values
@@ -87,25 +88,34 @@ export default function Charge() {
     context.fillRect(ax * gs, ay * gs, gs - 2, gs - 2);
   }
 
+  function moveLeft() {
+    xv = -1;
+    yv = 0;
+  }
+  function moveUp() {
+    xv = 0;
+    yv = -1;
+  }
+  function moveRight() {
+    xv = 1;
+    yv = 0;
+  }
+  function moveDown() {
+    xv = 0;
+    yv = 1;
+  }
+
   // User movements
   function keyPush(evt: object | any) {
     switch (evt.keyCode) {
       case 37:
-        xv = -1;
-        yv = 0;
-        break;
+        return moveLeft();
       case 38:
-        xv = 0;
-        yv = -1;
-        break;
+        return moveUp();
       case 39:
-        xv = 1;
-        yv = 0;
-        break;
+        return moveRight();
       case 40:
-        xv = 0;
-        yv = 1;
-        break;
+        return moveDown();
     }
   }
 
@@ -145,5 +155,36 @@ export default function Charge() {
     setTimeout(() => {
       modal.className = 'article-modal-span';
     }, time);
+  }
+
+  function controls() {
+    const controlSing = [
+      {id: 'left', class: 'fas fa-arrow-left'},
+      {id: 'right', class: 'fas fa-arrow-right'},
+      {id: 'down', class: 'fas fa-arrow-down'},
+      {id: 'up', class: 'fas fa-arrow-up'},
+    ];
+    const controlContainer = document.querySelector('.section-controls');
+    controlSing.forEach(item => {
+      const coverElement = document.createElement('span');
+      const iconElement = document.createElement('i');
+      iconElement.className = item.class;
+      coverElement.appendChild(iconElement);
+      coverElement.onclick = () => {
+        switch (item.id) {
+          case 'left':
+            return moveLeft();
+          case 'right':
+            return moveRight();
+
+          case 'down':
+            return moveDown();
+
+          case 'up':
+            return moveUp();
+        }
+      };
+      controlContainer.appendChild(coverElement);
+    });
   }
 }

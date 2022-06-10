@@ -37,10 +37,10 @@ module.exports = {
         },
       ],
     }),
-    new WorkboxPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
-    }),
+    // new WorkboxPlugin.GenerateSW({
+    //   clientsClaim: true,
+    //   skipWaiting: true,
+    // }),
   ],
   output: {
     filename: '[name].[contenthash].js',
