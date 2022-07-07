@@ -41,5 +41,8 @@
   "bugs": {
     "url": "https://github.com/makinox/Memory-game/issues"
   },
-  "homepage": "https://github.com/makinox/Memory-game#readme"
+  "homepage": "https://github.com/makinox/Memory-game#readme",
+  "dependencies": {
+    "@makinox/makinox-utils": "^1.0.3"
+  }
 }

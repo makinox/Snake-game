@@ -1,5 +1,5 @@
 import '../../styles/styles.css';
-import getDeviceType, {DeviceType} from '../../utils/utils';
+import {DeviceType, getDeviceType} from '@makinox/makinox-utils';
 
 export default function Charge() {
   document.addEventListener('DOMContentLoaded', () => {
